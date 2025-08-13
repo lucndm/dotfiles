@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Read|Grep|Glob|Task",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "/Users/luc.nguyen/workspaces/github.com/minhluc-info/claude-gemini-bridge/hooks/gemini-bridge.sh"
+          }
+        ]
+      }
+    ]
+  }
+}
