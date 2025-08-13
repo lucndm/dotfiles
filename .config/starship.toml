@@ -1,0 +1,215 @@
+# ~/.config/starship.toml
+# Starship configuration with best practices
+
+# Set command timeout
+command_timeout = 1000
+
+# Format with proper line wrapping
+format = """
+$username\
+$hostname\
+$directory\
+$git_branch\
+$git_status\
+$git_state\
+$docker_context\
+$package\
+$nodejs\
+$python\
+$rust\
+$golang\
+$java\
+$kotlin\
+$lua\
+$memory_usage\
+$aws\
+$kubernetes\
+$cmd_duration\
+$line_break\
+$character"""
+
+# Add right prompt for better space utilization
+right_format = """
+$time\
+"""
+
+# Character configuration
+[character]
+success_symbol = '[➜](bold green)'
+error_symbol = '[➜](bold red)'
+vimcmd_symbol = '[V](bold green)'
+
+# Directory configuration
+[directory]
+truncation_length = 3
+truncate_to_repo = true
+format = "[$path]($style)[$read_only]($read_only_style) "
+style = "cyan bold"
+read_only = " 🔒"
+read_only_style = "red"
+truncation_symbol = "…/"
+home_symbol = "~"
+
+# Git branch
+[git_branch]
+symbol = " "
+format = "on [$symbol$branch]($style) "
+style = "bold purple"
+truncation_length = 20
+truncation_symbol = "…"
+
+# Git status
+[git_status]
+format = '([\[$all_status$ahead_behind\]]($style) )'
+style = "bold red"
+conflicted = "🏳"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑"
+
+# Command duration
+[cmd_duration]
+min_time = 2_000
+format = "took [$duration]($style) "
+style = "bold yellow"
+show_milliseconds = false
+show_notifications = true
+min_time_to_notify = 45_000
+
+# Memory usage
+[memory_usage]
+disabled = false
+threshold = 75
+format = "via $symbol [${ram_pct}]($style) "
+style = "bold dimmed white"
+symbol = "🐏"
+
+# Time
+[time]
+disabled = false
+format = '[\[$time\]]($style) '
+time_format = "%H:%M"
+style = "bold dimmed white"
+
+# Username
+[username]
+style_user = "bold dimmed blue"
+style_root = "bold red"
+format = "[$user]($style) "
+disabled = false
+show_always = false
+
+# Hostname
+[hostname]
+ssh_only = true
+format = "on [$hostname]($style) "
+style = "bold dimmed green"
+disabled = false
+
+# AWS
+[aws]
+format = 'on [$symbol($profile )(\($region\) )]($style)'
+style = "bold yellow"
+symbol = "☁️  "
+[aws.region_aliases]
+us-east-1 = "use1"
+us-west-2 = "usw2"
+
+# Docker
+[docker_context]
+format = "via [$symbol$context]($style) "
+style = "blue bold"
+symbol = "🐳 "
+only_with_files = true
+detect_files = ["docker-compose.yml", "docker-compose.yaml", "Dockerfile"]
+detect_folders = []
+disabled = false
+
+# Kubernetes
+[kubernetes]
+format = 'on [⛵ $context\($namespace\)](dimmed green) '
+disabled = false
+[kubernetes.context_aliases]
+"dev.local.cluster.k8s" = "dev"
+
+# Python
+[python]
+symbol = "🐍 "
+pyenv_version_name = true
+format = 'via [${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
+style = "yellow bold"
+pyenv_prefix = "pyenv "
+python_binary = ["python", "python3", "python2"]
+detect_extensions = ["py"]
+detect_files = [".python-version", "Pipfile", "__pycache__", "pyproject.toml", "requirements.txt", "setup.py", "tox.ini"]
+detect_folders = []
+
+# Node.js
+[nodejs]
+format = "via [$symbol($version )]($style)"
+symbol = "⬢ "
+style = "bold green"
+disabled = false
+not_capable_style = "bold red"
+detect_extensions = ["js", "mjs", "cjs", "ts", "mts", "cts"]
+detect_files = ["package.json", ".node-version", ".nvmrc"]
+detect_folders = ["node_modules"]
+
+# Rust
+[rust]
+format = "via [$symbol($version )]($style)"
+symbol = "🦀 "
+style = "bold red"
+detect_extensions = ["rs"]
+detect_files = ["Cargo.toml"]
+detect_folders = []
+
+# Go
+[golang]
+format = "via [$symbol($version )]($style)"
+symbol = "🐹 "
+style = "bold cyan"
+detect_extensions = ["go"]
+detect_files = ["go.mod", "go.sum", "glide.yaml", "Gopkg.yml", "Gopkg.lock", ".go-version"]
+detect_folders = ["Godeps"]
+
+# Package version
+[package]
+format = "is [$symbol$version]($style) "
+symbol = "📦 "
+style = "bold 208"
+display_private = false
+disabled = false
+
+# Add to starship.toml
+[battery]
+disabled = false  # Disable if not on laptop
+
+[status]
+disabled = false
+format = '[\[$symbol $status\]]($style) '
+symbol = "✖"
+success_symbol = "✔️"
+not_executable_symbol = "🚫"
+not_found_symbol = "🔍"
+sigint_symbol = "🧱"
+signal_symbol = "⚡"
+style = "bg:blue"
+map_symbol = true
+pipestatus = true
+pipestatus_separator = "|"
+
+
+# Example: Show current Terraform workspace
+[custom.terraform]
+command = "terraform workspace show 2>/dev/null"
+when = '[[ -d .terraform ]]'
+symbol = "💠 "
+style = "bold purple"
+format = "on [$symbol$output]($style) "
