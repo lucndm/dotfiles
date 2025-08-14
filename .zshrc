@@ -1,0 +1,1 @@
+/Users/luc.nguyen/.dotfiles/zsh/zshrc.symlink
