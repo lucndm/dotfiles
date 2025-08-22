@@ -14,5 +14,16 @@
   },
   "feedbackSurveyState": {
     "lastShownTime": 1754016790706
-  }
+  },
+  "mcpServers": {
+		"sequential-thinking": {
+			"type": "stdio",
+			"command": "npx",
+			"args": [
+				"-y",
+				"@modelcontextprotocol/server-sequential-thinking"
+			]
+		}
+	}
+
 }
